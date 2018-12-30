@@ -1,4 +1,6 @@
 const express = require('express');
+// Just requiring Passport Setup to run it on app load
+require('./config/passport-setup');
 
 const authRoutes = require('./routes/auth-routes');
 

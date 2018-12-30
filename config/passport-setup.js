@@ -5,11 +5,15 @@ const GoogleStrategy = require('passport-google-oauth20');
 const keys = require('./keys');
 
 passport.use(
-    new GoogleStrategy({
-        clientID: keys.google.clientID,
-        clientSecret: keys.google.clientSecret
-    }),
-    () => {
-        // Passport callback function
-    }
+    new GoogleStrategy(
+        {
+            // Google Strategy options
+            callbackURL: '/auth/google/redirect',
+            clientID: keys.google.clientID,
+            clientSecret: keys.google.clientSecret
+        },
+        () => {
+            // Passport callback function
+        }
+    )
 );
