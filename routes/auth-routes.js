@@ -1,15 +1,26 @@
 const router = require('express').Router();
 const passport = require('passport');
 
+// A middleware to check if the user is logged in
+const authCheck = (req, res, next) => {
+    if (req.user) {
+        // If user is logged in
+        res.redirect('/');
+    }
+    // If user is not logged in
+    next();
+};
+
 // Auth login page
-router.get('/login', (req, res) => {
+router.get('/login', authCheck, (req, res) => {
     res.render('login');
 });
 
 // Auth logout
 router.get('/logout', (req, res) => {
-    // TODO handle with passport
-    res.send('Logging out');
+    // Handle with passport
+    req.logout();
+    res.redirect('/');
 });
 
 // Auth with Google
